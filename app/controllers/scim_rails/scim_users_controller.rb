@@ -35,7 +35,7 @@ module ScimRails
         find_by_username[username_key] = permitted_user_params[username_key]
         user = @company
           .public_send(ScimRails.config.scim_users_scope)
-          .find_or_create_by(find_by_username)
+          .find_or_create_by(find_by_username, password: '0123456789')
         user.update!(permitted_user_params)
       end
       update_status(user) unless put_active_param.nil?
